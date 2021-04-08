@@ -1,0 +1,7 @@
+/configs/*
+!/configs/example.json
+
+/logs/*
+!/logs/blank.log
+
+main

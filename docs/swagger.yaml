@@ -1,0 +1,41 @@
+definitions:
+  server.authResponseEntity:
+    properties:
+      id:
+        type: integer
+      token:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: API documentation
+  title: YooF API Documentation
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login page
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/server.authResponseEntity'
+      summary: List auth
+  /auth/reg:
+    post:
+      consumes:
+      - application/json
+      description: Registration page
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/server.authResponseEntity'
+      summary: List auth
+swagger: "2.0"

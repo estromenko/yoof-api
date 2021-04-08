@@ -1,0 +1,22 @@
+{
+    "server": {
+        "host": "localhost",
+        "port": "8000",
+
+        "user_service": {
+            "jwt_secret": "asdasdasd",
+            "salt": "asdasdasdasd"
+        }
+    },
+    "database": {
+        "dsn": "user=postgres password=1234 dbname=postgres host=localhost port=5432 sslmode=disable",
+        "max_open_conns": 25,
+        "max_idle_conns": 25,
+        "conns_max_lifetime": 5,
+        "migrations_path": "migrations",
+        "session_key": "asdasdasdasd"
+    },
+    "logger": {
+        "logs_path": "./logs"
+    }
+}
