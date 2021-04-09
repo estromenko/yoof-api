@@ -38,3 +38,12 @@ func (s *DishService) Create(dish *models.Dish) error {
 
 	return s.repo.Create(dish)
 }
+
+func (s *DishService) Update(dish *models.Dish) error {
+	errors := s.validate(dish)
+	if errors != "" {
+		return fmt.Errorf(errors)
+	}
+
+	return s.repo.Update(dish)
+}

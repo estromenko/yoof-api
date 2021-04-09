@@ -46,3 +46,14 @@ func (r *DishRepo) DeleteByID(id int) error {
 	}
 	return nil
 }
+
+func (r *DishRepo) Update(dish *models.Dish) error {
+	if err := r.db.QueryRow(
+		`UPDATE dishes SET 
+		name = $1, description = $2, image = $3, video_link = $4, calories = $5, variation = $6, day_time = $7`,
+		dish.Name, dish.Description, dish.Image, dish.VideoLink, dish.Calories, dish.Variation, dish.DayTime,
+	).Scan(); err != nil && err != sql.ErrNoRows {
+		return err
+	}
+	return nil
+}
