@@ -44,7 +44,7 @@ func (s *Server) Run() error {
 	r := s.route()
 
 	s.logger.Debug().Msg("Server started at " + s.config.Host + ":" + s.config.Port)
-	return r.Run(s.config.Host + ":" + s.config.Port)
+	return r.Run(":" + s.config.Port)
 }
 
 // @Description Base page
@@ -76,6 +76,17 @@ func (s *Server) route() *gin.Engine {
 			user.Use(s.authMiddleware())
 
 			user.GET("/info", s.GetUserInfoHandler())
+		}
+
+		dishes := public.Group("/dishes")
+		{
+			dishes.Use(s.authMiddleware())
+
+			dishes.POST("/create", s.CreateDish())
+			dishes.GET("", s.GetAllDishes())
+			dishes.PUT("/:id", s.UpdateDish())
+			dishes.GET("/:id", s.GetDish())
+			dishes.DELETE("/:id", s.DeleteDish())
 		}
 	}
 

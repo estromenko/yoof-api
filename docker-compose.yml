@@ -9,7 +9,7 @@ services:
     volumes: 
       - .:/workdir
 
-    command: go build cmd/app/main.go && ./main -config configs/example.json 
+    command: go run cmd/app/main.go -config configs/example.json 
     
     depends_on: 
       - db

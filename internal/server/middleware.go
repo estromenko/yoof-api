@@ -40,7 +40,7 @@ func (s *Server) authMiddleware() gin.HandlerFunc {
 		if err != nil {
 			c.Abort()
 			c.JSON(403, map[string]string{
-				"error": err.Error(),
+				"error": "token error: " + err.Error(),
 			})
 			return
 		}
@@ -51,7 +51,7 @@ func (s *Server) authMiddleware() gin.HandlerFunc {
 		if err != nil {
 			c.Abort()
 			c.JSON(403, map[string]string{
-				"error": err.Error(),
+				"error": "token error: " + err.Error(),
 			})
 			return
 		}

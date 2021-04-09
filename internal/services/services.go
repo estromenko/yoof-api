@@ -7,10 +7,12 @@ import (
 
 type Config struct {
 	User *UserServiceConfig `mapstructure:"user"`
+	Dish *DishServiceConfig `mapstructure:"dish"`
 }
 
 type Services struct {
 	UserService *UserService
+	DishService *DishService
 }
 
 func InitServices(conn *sqlx.DB, config *Config) *Services {
@@ -18,6 +20,10 @@ func InitServices(conn *sqlx.DB, config *Config) *Services {
 		UserService: NewUserService(
 			repo.NewUserRepo(conn),
 			config.User,
+		),
+		DishService: NewDishService(
+			repo.NewDishRepo(conn),
+			config.Dish,
 		),
 	}
 }
