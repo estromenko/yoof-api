@@ -58,3 +58,7 @@ func (r *DishRepo) FindAllInCaloriesRange(gte float32, lte float32) ([]*models.D
 
 	return dishes, nil
 }
+
+func (r *DishRepo) Update(dish *models.Dish) error {
+	return nil
+}

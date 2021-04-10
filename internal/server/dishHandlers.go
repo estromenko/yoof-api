@@ -100,6 +100,21 @@ func (s *Server) DeleteDish() gin.HandlerFunc {
 
 func (s *Server) UpdateDish() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		var dish models.Dish
+		if err := json.NewDecoder(c.Request.Body).Decode(&dish); err != nil {
+			c.JSON(400, map[string]string{
+				"error": "error decoding dish: " + err.Error(),
+			})
+			return
+		}
 
+		if err := s.Services().DishService.Update(&dish); err != nil {
+			c.JSON(400, map[string]string{
+				"error": "error updating dish: " + err.Error(),
+			})
+			return
+		}
+
+		c.JSON(200, dish)
 	}
 }
