@@ -84,9 +84,16 @@ func (s *Server) route() *gin.Engine {
 
 			dishes.POST("/create", s.CreateDish())
 			dishes.GET("", s.GetAllDishes())
-			dishes.PUT("/:id", s.UpdateDish())
+			dishes.PUT("/:id", s.UpdateDish()) // TODO
 			dishes.GET("/:id", s.GetDish())
 			dishes.DELETE("/:id", s.DeleteDish())
+		}
+
+		calc := public.Group("/calc")
+		{
+			dishes.Use(s.authMiddleware())
+
+			calc.GET("/calories", s.GetCalories())
 		}
 	}
 

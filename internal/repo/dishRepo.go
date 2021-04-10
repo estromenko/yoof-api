@@ -46,3 +46,15 @@ func (r *DishRepo) DeleteByID(id int) error {
 	}
 	return nil
 }
+
+func (r *DishRepo) FindAllInCaloriesRange(gte float32, lte float32) ([]*models.Dish, error) {
+	var dishes []*models.Dish
+
+	if err := r.db.Select(&dishes, `SELECT * FROM dishes
+		WHERE calories > $1 AND calories < $2
+		ORDER BY NEWID()`, gte, lte); err != nil {
+		return nil, err
+	}
+
+	return dishes, nil
+}

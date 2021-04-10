@@ -13,17 +13,23 @@ type Config struct {
 type Services struct {
 	UserService *UserService
 	DishService *DishService
+	CalcService *CalcService
 }
 
 func InitServices(conn *sqlx.DB, config *Config) *Services {
+	userRepo := repo.NewUserRepo(conn)
+	dishRepo := repo.NewDishRepo(conn)
 	return &Services{
 		UserService: NewUserService(
-			repo.NewUserRepo(conn),
+			userRepo,
 			config.User,
 		),
 		DishService: NewDishService(
-			repo.NewDishRepo(conn),
+			dishRepo,
 			config.Dish,
+		),
+		CalcService: NewCalcService(
+			dishRepo,
 		),
 	}
 }

@@ -33,6 +33,14 @@ func (s *Server) GetAllDishes() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		limit, _ := strconv.Atoi(c.DefaultQuery("limit", "?"))
 		offset, _ := strconv.Atoi(c.DefaultQuery("offset", "0"))
+
+		if limit == '?' || limit == 0 {
+			c.JSON(400, map[string]string{
+				"error": "limit must be provided as query param",
+			})
+			return
+		}
+
 		dishes, err := s.Services().DishService.Repo().GetAll(limit, offset)
 		if err != nil {
 			c.JSON(400, map[string]string{
